@@ -8,37 +8,32 @@
 		/>
 		<title>WanderPop - Playful Travel Companion</title>
 
-		<!-- Fonts: Outfit (Headings) & Plus Jakarta Sans (Body) -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
 			rel="stylesheet"
 		/>
-
-		<!-- FontAwesome Icons -->
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 		/>
 
-		<!-- Tailwind CSS (CDN) -->
 		<script src="https://cdn.tailwindcss.com"></script>
-
 		<script>
 			tailwind.config = {
 				theme: {
 					extend: {
 						colors: {
-							bg: '#FFFDF5', // Warm Cream
-							fg: '#1E293B', // Slate 800
-							muted: '#F1F5F9', // Slate 100
-							mutedFg: '#64748B', // Slate 500
-							accent: '#8B5CF6', // Vivid Violet
-							secondary: '#F472B6', // Hot Pink
-							tertiary: '#FBBF24', // Amber/Yellow
-							quaternary: '#34D399', // Emerald/Mint
-							border: '#E2E8F0', // Slate 200
+							bg: '#FFFDF5', // 暖白底色
+							fg: '#1E293B', // 深藍灰文字
+							muted: '#F1F5F9',
+							mutedFg: '#64748B',
+							accent: '#8B5CF6', // 亮紫色
+							secondary: '#F472B6', // 亮粉色
+							tertiary: '#FBBF24', // 亮黃色
+							quaternary: '#34D399', // 薄荷綠
+							border: '#E2E8F0',
 						},
 						boxShadow: {
 							pop: '4px 4px 0px 0px #1E293B',
@@ -85,7 +80,6 @@
 					border-radius: 24px 0 24px 24px;
 				}
 
-				/* UI Components based on Playful Geometric */
 				.candy-btn {
 					@apply bg-accent text-white font-display font-bold text-lg rounded-full border-2 border-fg shadow-pop 
                        transition-all duration-300 ease-bouncy 
@@ -108,14 +102,18 @@
 					@apply bg-white border-2 border-fg rounded-xl shadow-sticker relative p-5 mb-5 transition-all;
 				}
 
+				/* 極度嚴格的寬度限制，解決 iOS Safari 日期/時間選擇器跑版問題 */
 				.input-candy {
-					@apply bg-white border-2 border-slate-300 rounded-lg text-fg focus:border-accent focus:shadow-pop outline-none transition-all duration-300 p-3 w-full font-sans mb-4;
+					@apply block bg-white border-2 border-slate-300 rounded-lg text-fg focus:border-accent focus:shadow-pop outline-none transition-all duration-300 p-3 font-sans mb-4 appearance-none;
+					width: 100% !important;
+					max-width: 100% !important;
+					min-width: 0 !important;
+					box-sizing: border-box !important;
 				}
 				.label-candy {
 					@apply block font-display font-bold uppercase tracking-wide text-xs mb-1.5 text-fg/80;
 				}
 
-				/* Hide Scrollbar */
 				.no-scrollbar::-webkit-scrollbar {
 					display: none;
 				}
@@ -129,13 +127,24 @@
 				@apply bg-bg text-fg min-h-screen flex flex-col font-sans selection:bg-accent selection:text-white;
 				-webkit-tap-highlight-color: transparent;
 			}
+
+			/* 彈出動畫 */
+			@keyframes popIn {
+				0% {
+					opacity: 0;
+					transform: scale(0.9) translateY(10px);
+				}
+				100% {
+					opacity: 1;
+					transform: scale(1) translateY(0);
+				}
+			}
 		</style>
 	</head>
 	<body class="bg-polka bg-fixed">
 		<header
 			class="sticky top-0 z-50 bg-bg/95 backdrop-blur-md border-b-2 border-fg shadow-sm"
 		>
-			<!-- Privacy Warning Bar -->
 			<div
 				class="bg-secondary text-white text-[10px] font-bold text-center py-1 px-2 border-b-2 border-fg flex items-center justify-center gap-1.5 tracking-wider"
 			>
@@ -165,7 +174,7 @@
 			</div>
 		</header>
 
-		<!-- Data Management Modal -->
+		<!-- 資料管理 Modal -->
 		<div
 			id="modal-data"
 			class="fixed inset-0 bg-fg/60 z-[100] hidden flex-col items-center justify-center p-4 backdrop-blur-sm transition-opacity"
@@ -187,7 +196,7 @@
 					資料管理
 				</h2>
 				<p class="text-sm text-mutedFg mb-6 font-medium">
-					所有的旅遊資料都安全地儲存在您的手機瀏覽器中。您可以隨時匯出備份或分享給旅伴。
+					旅遊資料安全地儲存在您的手機中。您可以隨時匯出備份或分享給旅伴。
 				</p>
 
 				<div class="flex flex-col gap-4">
@@ -218,7 +227,7 @@
 			</div>
 		</div>
 
-		<!-- Image Preview Modal -->
+		<!-- 圖片預覽 Modal -->
 		<div
 			id="modal-image"
 			class="fixed inset-0 bg-fg/90 z-[110] hidden flex-col items-center justify-center p-4 backdrop-blur-md"
@@ -236,30 +245,29 @@
 			id="app-content"
 			class="flex-1 w-full max-w-2xl mx-auto p-4 pb-28 relative"
 		>
-			<!-- Dynamic content injected here -->
+			<!-- 內容由 JavaScript 動態注入 -->
 		</main>
 
 		<nav
 			class="fixed bottom-0 left-0 w-full bg-white border-t-2 border-fg pb-safe z-40 shadow-[0_-4px_0_0_rgba(30,41,59,0.05)]"
 		>
 			<div
-				class="max-w-2xl mx-auto flex justify-around items-center p-2 overflow-x-auto no-scrollbar"
+				class="max-w-2xl mx-auto flex justify-around items-center p-2 overflow-x-auto no-scrollbar gap-2"
 				id="nav-container"
 			>
-				<!-- Nav buttons injected via JS -->
+				<!-- 按鈕由 JavaScript 動態注入 -->
 			</div>
 		</nav>
 
 		<script>
-			// --- Core State Management ---
-			const STORAGE_KEY = 'wanderpop_data_v1';
+			const STORAGE_KEY = 'wanderpop_data_v2';
 
-			// Default Template
+			// 預設狀態結構
 			const defaultState = {
-				plan: [], // {id, date, time, title, loc, important}
-				guide: [], // {id, title, desc, embedUrl}
-				wallet: { rate: 0.21, expenses: [] }, // expenses: {id, date, item, jpy, twd, payer, img}
-				lists: { checklist: [], memos: [] }, // checklist: {id, text, done}, memos: {id, text}
+				plan: [],
+				guide: [],
+				wallet: { rate: 0.21, expenses: [] },
+				lists: { checklist: [], memos: [] },
 				info: {
 					notes:
 						'📝 旅遊注意事項：\n1. 護照請隨身攜帶\n2. 貴重物品請勿離身\n3. 記得帶轉接頭\n\n可點擊上方編輯按鈕修改此處內容！',
@@ -267,12 +275,12 @@
 				shop: {
 					categories: ['美妝', '超市', '衣服', '伴手禮', '電器'],
 					items: [],
-				}, // items: {id, name, cat, img, couponImg}
+				},
 			};
 
+			// 初始化 LocalStorage
 			let appState = JSON.parse(localStorage.getItem(STORAGE_KEY));
 			if (!appState || !appState.shop) {
-				// basic migration/fallback
 				appState = JSON.parse(JSON.stringify(defaultState));
 				saveState();
 			}
@@ -285,7 +293,7 @@
 
 			const generateId = () => Math.random().toString(36).substr(2, 9);
 
-			// Canvas Image Compression to Base64
+			// 圖片 Canvas 壓縮邏輯，避免 Base64 塞爆 LocalStorage
 			function compressImage(file, callback) {
 				if (!file) return callback(null);
 				const reader = new FileReader();
@@ -309,17 +317,17 @@
 						canvas.width = width;
 						canvas.height = height;
 						ctx.drawImage(img, 0, 0, width, height);
-						callback(canvas.toDataURL('image/jpeg', 0.6)); // Compress
+						callback(canvas.toDataURL('image/jpeg', 0.6));
 					};
 					img.src = e.target.result;
 				};
 				reader.readAsDataURL(file);
 			}
 
-			// Safe Math Evaluation
+			// 匯率計算機字串求值
 			function evaluateMath(str) {
 				try {
-					const sanitized = str.replace(/[^-()\d/*+.]/g, ''); // Allow only math chars
+					const sanitized = str.replace(/[^-()\d/*+.]/g, '');
 					if (!sanitized) return 0;
 					return new Function('return ' + sanitized)();
 				} catch (e) {
@@ -327,7 +335,7 @@
 				}
 			}
 
-			// URL to Link Converter
+			// 備忘錄網址轉換
 			function linkify(text) {
 				const urlRegex = /(https?:\/\/[^\s]+)/g;
 				return text.replace(urlRegex, function (url) {
@@ -335,10 +343,12 @@
 				});
 			}
 
-			// --- Render Functions ---
+			/* =========================================================================
+           頁面渲染邏輯 (Render Functions)
+           ========================================================================= */
 
 			function renderPlan() {
-				// Sort by date then time
+				// 排序：日期優先，時間次之
 				appState.plan.sort(
 					(a, b) =>
 						a.date.localeCompare(b.date) || a.time.localeCompare(b.time),
@@ -352,28 +362,28 @@
                     </div>
                 </div>
 
-                <div class="sticker-card !bg-muted blob-radius-2 animate-[popIn_0.4s_ease-out]">
+                <div class="sticker-card !bg-muted blob-radius-2 animate-[popIn_0.4s_ease-out] w-full">
                     <h3 class="font-display font-bold text-lg mb-3 flex items-center gap-2"><i class="fa-solid fa-calendar-plus text-secondary"></i> 新增行程</h3>
-                    <form id="form-plan" class="flex flex-col gap-1">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
+                    <form id="form-plan" class="flex flex-col gap-1 w-full">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                            <div class="w-full">
                                 <label class="label-candy">日期</label>
                                 <input type="date" id="plan-date" class="input-candy" required>
                             </div>
-                            <div>
+                            <div class="w-full">
                                 <label class="label-candy">時間</label>
                                 <input type="time" id="plan-time" class="input-candy" required>
                             </div>
                         </div>
-                        <div>
+                        <div class="w-full">
                             <label class="label-candy">標題/活動</label>
                             <input type="text" id="plan-title" class="input-candy" placeholder="例：抵達機場、和牛燒肉" required>
                         </div>
-                        <div>
+                        <div class="w-full">
                             <label class="label-candy">地點 (自動產生地圖連結)</label>
                             <input type="text" id="plan-loc" class="input-candy" placeholder="例：東京鐵塔">
                         </div>
-                        <div class="flex items-center gap-2 mb-4 bg-white p-3 border-2 border-border rounded-lg">
+                        <div class="flex items-center gap-2 mb-4 bg-white p-3 border-2 border-border rounded-lg w-full">
                             <input type="checkbox" id="plan-important" class="w-5 h-5 accent-tertiary rounded">
                             <label for="plan-important" class="font-bold text-sm select-none">標記為重要集合/出發時間</label>
                         </div>
@@ -381,7 +391,7 @@
                     </form>
                 </div>
                 
-                <div class="flex flex-col gap-5 mt-8 relative">
+                <div class="flex flex-col gap-5 mt-8 relative w-full">
                     <div class="absolute left-[31px] top-0 bottom-0 w-1 bg-border z-0"></div>
             `;
 
@@ -405,7 +415,7 @@
 						: '';
 
 					html += `
-                    <div class="relative animate-[popIn_0.3s_ease-out]" style="animation-delay: ${index * 0.05}s">
+                    <div class="relative animate-[popIn_0.3s_ease-out] w-full" style="animation-delay: ${index * 0.05}s">
                         <div class="absolute left-2 top-6 w-5 h-5 rounded-full border-2 z-10 ${dotColor} shadow-[2px_2px_0px_#1E293B]"></div>
                         <div class="${cardClass} flex gap-3">
                             <div class="font-display font-extrabold text-lg min-w-[55px] pt-0.5 ${isImportant ? 'text-fg' : 'text-mutedFg'}">${item.time}</div>
@@ -438,19 +448,19 @@
                     </div>
                 </div>
 
-                <div class="sticker-card !bg-stripes blob-radius-3 animate-[popIn_0.4s_ease-out]">
+                <div class="sticker-card !bg-stripes blob-radius-3 animate-[popIn_0.4s_ease-out] w-full">
                     <div class="bg-white p-4 rounded-xl border-2 border-fg">
                         <h3 class="font-display font-bold text-lg mb-3 flex items-center gap-2"><i class="fa-solid fa-pen-nib text-accent"></i> 撰寫景點介紹</h3>
-                        <form id="form-guide" class="flex flex-col gap-1">
-                            <div>
+                        <form id="form-guide" class="flex flex-col gap-1 w-full">
+                            <div class="w-full">
                                 <label class="label-candy">景點名稱</label>
                                 <input type="text" id="guide-title" class="input-candy" required>
                             </div>
-                            <div>
+                            <div class="w-full">
                                 <label class="label-candy">介紹、歷史背景或冷知識</label>
                                 <textarea id="guide-desc" class="input-candy h-28 resize-none" required></textarea>
                             </div>
-                            <div>
+                            <div class="w-full">
                                 <label class="label-candy">OSM 地圖嵌入代碼 (選填)</label>
                                 <input type="text" id="guide-embed" class="input-candy text-xs font-mono" placeholder="<iframe src='https://www.openstreetmap.org/...'>">
                             </div>
@@ -459,7 +469,7 @@
                     </div>
                 </div>
                 
-                <div class="flex flex-col gap-8 mt-8">
+                <div class="flex flex-col gap-8 mt-8 w-full">
             `;
 
 				appState.guide.forEach((item, index) => {
@@ -472,14 +482,13 @@
 					}
 
 					html += `
-                    <div class="bg-white border-2 border-fg rounded-2xl p-6 shadow-sticker relative overflow-hidden animate-[popIn_0.4s_ease-out]" style="animation-delay: ${index * 0.1}s">
-                        <!-- Decorative shapes -->
+                    <div class="bg-white border-2 border-fg rounded-2xl p-6 shadow-sticker relative overflow-hidden animate-[popIn_0.4s_ease-out] w-full" style="animation-delay: ${index * 0.1}s">
                         <div class="absolute -right-8 -top-8 w-32 h-32 bg-quaternary/20 rounded-full z-0"></div>
                         <div class="absolute -left-4 -bottom-4 w-20 h-20 bg-tertiary/20 transform rotate-45 z-0"></div>
                         
-                        <div class="relative z-10">
+                        <div class="relative z-10 w-full">
                             <div class="flex justify-between items-start mb-4 border-b-4 border-fg pb-3">
-                                <h3 class="font-display font-extrabold text-3xl text-fg leading-none">${item.title}</h3>
+                                <h3 class="font-display font-extrabold text-3xl text-fg leading-none break-words flex-1 pr-2">${item.title}</h3>
                                 <button onclick="deleteItem('guide', '${item.id}')" class="w-8 h-8 bg-white rounded-full border-2 border-fg shadow-[2px_2px_0px_#1E293B] flex items-center justify-center text-mutedFg hover:text-red-500 hover:bg-red-50 transition-colors shrink-0"><i class="fa-solid fa-xmark"></i></button>
                             </div>
                             <div class="font-sans text-fg/90 font-medium leading-loose text-justify whitespace-pre-wrap text-lg">${item.desc}</div>
@@ -489,7 +498,7 @@
                 `;
 				});
 				if (appState.guide.length === 0)
-					html += `<div class="text-center text-mutedFg py-12 font-bold border-2 border-dashed border-border rounded-xl">尚無導覽資料。<br>像編輯雜誌一樣，寫下景點故事吧！</div>`;
+					html += `<div class="text-center text-mutedFg py-12 font-bold border-2 border-dashed border-border rounded-xl w-full">尚無導覽資料。<br>像編輯雜誌一樣，寫下景點故事吧！</div>`;
 				html += `</div>`;
 				return html;
 			}
@@ -499,6 +508,7 @@
 					(acc, curr) => acc + parseFloat(curr.twd),
 					0,
 				);
+				const todayStr = new Date().toISOString().split('T')[0];
 
 				let html = `
                 <div class="mb-6 flex justify-between items-end animate-[popIn_0.3s_ease-out]">
@@ -508,108 +518,105 @@
                     </div>
                 </div>
 
-                <!-- Rate & Calculator Tool -->
-                <div class="bg-fg text-white border-2 border-fg rounded-2xl p-5 shadow-pop mb-6 relative overflow-hidden animate-[popIn_0.4s_ease-out]">
+                <div class="bg-fg text-white border-2 border-fg rounded-2xl p-5 shadow-pop mb-6 relative overflow-hidden animate-[popIn_0.4s_ease-out] w-full">
                     <div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
                     
-                    <div class="flex justify-between items-center mb-4 relative z-10 border-b border-white/20 pb-3">
+                    <div class="flex justify-between items-center mb-4 relative z-10 border-b border-white/20 pb-3 w-full">
                         <div class="font-bold font-display text-lg"><i class="fa-solid fa-right-left text-quaternary mr-2"></i>匯率 (JPY → TWD)</div>
                         <div class="flex items-center gap-2">
                             <span class="text-sm font-bold text-white/50">1 JPY =</span>
-                            <input type="number" id="wallet-rate" value="${appState.wallet.rate}" step="0.001" class="w-20 px-2 py-1 bg-white text-fg font-bold rounded outline-none text-center shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] border-2 border-transparent focus:border-quaternary">
+                            <input type="number" id="wallet-rate" value="${appState.wallet.rate}" step="0.001" class="w-20 px-2 py-1 bg-white text-fg font-bold rounded outline-none text-center border-2 border-transparent focus:border-quaternary">
                         </div>
                     </div>
                     
-                    <div class="relative z-10 mt-2">
-                        <label class="block text-xs font-bold text-quaternary uppercase tracking-widest mb-2">快速計算機 (可輸入算式如 500+200*3)</label>
-                        <div class="flex gap-2">
-                            <input type="text" id="wallet-calc-input" placeholder="日幣金額或算式..." class="flex-1 bg-white text-fg font-bold px-3 py-2.5 rounded-lg outline-none focus:ring-4 focus:ring-quaternary/30 text-lg">
-                            <button id="btn-calc" class="bg-quaternary text-fg font-bold px-4 py-2.5 rounded-lg hover:bg-white transition-colors shadow-[2px_2px_0px_#FFF] hover:shadow-[4px_4px_0px_#FFF] active:shadow-none"><i class="fa-solid fa-calculator"></i> 換算</button>
+                    <div class="relative z-10 mt-2 w-full">
+                        <label class="block text-xs font-bold text-quaternary uppercase tracking-widest mb-2">快速計算機 (支援加減乘除)</label>
+                        <div class="flex gap-2 w-full">
+                            <input type="text" id="wallet-calc-input" placeholder="日幣金額或算式..." class="flex-1 bg-white text-fg font-bold px-3 py-2.5 rounded-lg outline-none min-w-0">
+                            <button id="btn-calc" class="bg-quaternary text-fg font-bold px-4 py-2.5 rounded-lg hover:bg-white transition-colors shrink-0"><i class="fa-solid fa-calculator"></i> 換算</button>
                         </div>
-                        <div class="mt-4 flex justify-end items-baseline gap-2">
+                        <div class="mt-4 flex justify-end items-baseline gap-2 w-full">
                             <span class="text-sm font-bold text-white/60">約 TWD</span> 
-                            <span id="wallet-calc-result" class="text-quaternary font-display font-extrabold text-4xl">0</span>
+                            <span id="wallet-calc-result" class="text-quaternary font-display font-extrabold text-4xl truncate">0</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Add Expense Form -->
-                <div class="sticker-card blob-radius-1 animate-[popIn_0.5s_ease-out]">
+                <div class="sticker-card blob-radius-1 animate-[popIn_0.5s_ease-out] w-full">
                     <h3 class="font-display font-bold text-lg mb-3 flex items-center gap-2"><i class="fa-solid fa-receipt text-accent"></i> 記一筆花費</h3>
-                    <form id="form-expense" class="flex flex-col gap-1">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
+                    <form id="form-expense" class="flex flex-col gap-1 w-full">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                            <div class="w-full">
                                 <label class="label-candy">日期</label>
-                                <input type="date" id="exp-date" class="input-candy" required value="${new Date().toISOString().split('T')[0]}">
+                                <input type="date" id="exp-date" class="input-candy" required value="${todayStr}">
                             </div>
-                            <div>
+                            <div class="w-full">
                                 <label class="label-candy">付款人 (分帳用)</label>
                                 <input type="text" id="exp-payer" class="input-candy" placeholder="例：小明" required>
                             </div>
                         </div>
-                        <div>
-                            <label class="label-candy">品項</label>
+                        <div class="w-full">
+                            <label class="label-candy">品項名稱</label>
                             <input type="text" id="exp-item" class="input-candy" placeholder="例：一蘭拉麵" required>
                         </div>
-                        <div>
-                            <label class="label-candy">日幣金額 (JPY)</label>
+                        <div class="w-full">
+                            <label class="label-candy">日幣金額 (支援算式)</label>
                             <div class="relative">
-                                <span class="absolute left-3 top-3.5 font-bold text-mutedFg">¥</span>
-                                <input type="number" id="exp-jpy" class="input-candy pl-8 !text-lg !font-bold !text-accent" placeholder="0" required>
+                                <span class="absolute left-3 top-3.5 font-bold text-mutedFg z-10">¥</span>
+                                <input type="text" id="exp-jpy" class="input-candy pl-8 !text-lg !font-bold !text-accent relative z-0" placeholder="0 或 500*2" required>
                             </div>
                         </div>
-                        <div class="mb-2">
-                            <label class="label-candy">收據或明細拍照 (選填)</label>
+                        <div class="mb-2 w-full">
+                            <label class="label-candy">收據拍照 (選填)</label>
                             <div class="flex items-center gap-2 bg-muted p-2 rounded-lg border-2 border-border border-dashed">
                                 <input type="file" id="exp-img" accept="image/*" capture="environment" class="text-sm font-bold w-full file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-2 file:border-fg file:text-sm file:font-bold file:bg-white file:text-fg hover:file:bg-tertiary transition-colors cursor-pointer">
                             </div>
                         </div>
-                        <button type="submit" class="candy-btn mt-2"><i class="fa-solid fa-plus"></i> 儲存紀錄</button>
+                        <button type="submit" class="candy-btn mt-2 w-full"><i class="fa-solid fa-plus"></i> 儲存紀錄</button>
                     </form>
                 </div>
 
-                <!-- Expenses List -->
-                <div class="mt-8 mb-6 animate-[popIn_0.6s_ease-out]">
+                <div class="mt-8 mb-6 animate-[popIn_0.6s_ease-out] w-full">
                     <div class="flex justify-between items-end mb-4 border-b-4 border-fg pb-2">
                         <h3 class="font-display font-extrabold text-2xl">消費清單</h3>
                         <div class="text-right">
                             <div class="text-xs font-bold text-mutedFg uppercase">總計 (TWD)</div>
-                            <div class="font-display font-extrabold text-2xl text-secondary">$${Math.round(totalTWD).toLocaleString()}</div>
+                            <div class="font-display font-extrabold text-2xl text-secondary truncate max-w-[150px]">$${Math.round(totalTWD).toLocaleString()}</div>
                         </div>
                     </div>
                     
-                    <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-4 w-full">
             `;
 
 				appState.wallet.expenses
 					.slice()
 					.reverse()
-					.forEach((exp, idx) => {
+					.forEach((exp) => {
 						const imgHtml = exp.img
 							? `<div class="w-16 h-16 shrink-0 rounded-lg border-2 border-fg overflow-hidden cursor-pointer shadow-[2px_2px_0px_#1E293B]" onclick="viewImage('${exp.img}')"><img src="${exp.img}" class="w-full h-full object-cover hover:scale-110 transition-transform"></div>`
 							: `<div class="w-16 h-16 shrink-0 rounded-lg border-2 border-dashed border-mutedFg flex items-center justify-center bg-muted text-mutedFg"><i class="fa-solid fa-image-slash"></i></div>`;
 
 						html += `
-                    <div class="bg-white border-2 border-fg rounded-xl p-3 shadow-pop flex gap-3 items-center relative group">
+                    <div class="bg-white border-2 border-fg rounded-xl p-3 shadow-pop flex gap-3 items-center relative group w-full">
                         ${imgHtml}
                         <div class="flex-1 min-w-0 pr-6">
                             <div class="flex items-center gap-2 mb-1">
-                                <span class="text-[10px] font-extrabold text-fg bg-tertiary px-1.5 py-0.5 rounded border border-fg">${exp.date.slice(5)}</span>
-                                <span class="text-[10px] font-bold text-mutedFg"><i class="fa-solid fa-user text-[8px]"></i> ${exp.payer}</span>
+                                <span class="text-[10px] font-extrabold text-fg bg-tertiary px-1.5 py-0.5 rounded border border-fg whitespace-nowrap">${exp.date.slice(5)}</span>
+                                <span class="text-[10px] font-bold text-mutedFg truncate"><i class="fa-solid fa-user text-[8px]"></i> ${exp.payer}</span>
                             </div>
                             <div class="font-bold text-fg text-lg truncate leading-tight">${exp.item}</div>
-                            <div class="flex items-end gap-2 mt-1">
-                                <span class="font-display font-bold text-mutedFg text-sm">¥${exp.jpy.toLocaleString()}</span>
-                                <i class="fa-solid fa-arrow-right text-[10px] text-border"></i>
-                                <span class="font-display font-extrabold text-quaternary text-lg">NT$${Math.round(exp.twd).toLocaleString()}</span>
+                            <div class="flex items-end gap-2 mt-1 truncate w-full">
+                                <span class="font-display font-bold text-mutedFg text-sm whitespace-nowrap">¥${exp.jpy.toLocaleString()}</span>
+                                <i class="fa-solid fa-arrow-right text-[10px] text-border shrink-0"></i>
+                                <span class="font-display font-extrabold text-quaternary text-lg truncate">NT$${Math.round(exp.twd).toLocaleString()}</span>
                             </div>
                         </div>
-                        <button onclick="deleteItem('wallet.expenses', '${exp.id}')" class="absolute top-3 right-3 w-7 h-7 bg-white border-2 border-fg rounded-full flex items-center justify-center shadow-[2px_2px_0px_#1E293B] text-mutedFg hover:text-red-500 hover:bg-red-50 transition-colors"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                        <button onclick="deleteItem('wallet.expenses', '${exp.id}')" class="absolute top-3 right-3 w-7 h-7 bg-white border-2 border-fg rounded-full flex items-center justify-center shadow-[2px_2px_0px_#1E293B] text-mutedFg hover:text-red-500 hover:bg-red-50 transition-colors shrink-0"><i class="fa-solid fa-trash-can text-xs"></i></button>
                     </div>
                 `;
 					});
 				if (appState.wallet.expenses.length === 0)
-					html += `<div class="text-center text-mutedFg py-8 font-bold border-2 border-dashed border-border rounded-xl">目前還沒有記帳紀錄喔！</div>`;
+					html += `<div class="text-center text-mutedFg py-8 font-bold border-2 border-dashed border-border rounded-xl w-full">目前還沒有記帳紀錄喔！</div>`;
 				html += `</div></div>`;
 				return html;
 			}
@@ -623,47 +630,45 @@
                     </div>
                 </div>
 
-                <!-- Checklist -->
-                <div class="bg-white border-2 border-fg rounded-2xl p-5 shadow-sticker mb-8 relative animate-[popIn_0.4s_ease-out]">
+                <div class="bg-white border-2 border-fg rounded-2xl p-5 shadow-sticker mb-8 relative animate-[popIn_0.4s_ease-out] w-full">
                     <div class="absolute -top-3 -right-3 w-10 h-10 bg-accent rounded-full border-2 border-fg shadow-pop flex items-center justify-center z-10"><i class="fa-solid fa-check text-white"></i></div>
                     <h3 class="font-display font-bold text-2xl mb-4 border-b-4 border-muted pb-2">行前準備</h3>
                     
-                    <form id="form-checklist" class="flex gap-2 mb-5">
-                        <input type="text" id="check-text" class="input-candy !mb-0 flex-1" placeholder="輸入待辦事項..." required>
-                        <button type="submit" class="candy-btn !px-4 !py-2 !rounded-lg"><i class="fa-solid fa-plus"></i></button>
+                    <form id="form-checklist" class="flex gap-2 mb-5 w-full">
+                        <input type="text" id="check-text" class="input-candy !mb-0 flex-1 min-w-0" placeholder="輸入待辦事項..." required>
+                        <button type="submit" class="candy-btn !px-4 !py-2 !rounded-lg shrink-0"><i class="fa-solid fa-plus"></i></button>
                     </form>
                     
-                    <div class="flex flex-col gap-2">
+                    <div class="flex flex-col gap-2 w-full">
             `;
 
 				appState.lists.checklist.forEach((item) => {
 					html += `
-                    <div class="flex items-center justify-between p-3 hover:bg-muted/50 rounded-xl transition-colors border-2 ${item.done ? 'border-transparent bg-muted/50' : 'border-border'} group">
+                    <div class="flex items-center justify-between p-3 hover:bg-muted/50 rounded-xl transition-colors border-2 ${item.done ? 'border-transparent bg-muted/50' : 'border-border'} group w-full">
                         <label class="flex items-center gap-4 cursor-pointer flex-1 min-w-0">
                             <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleChecklist('${item.id}', this.checked)" class="w-6 h-6 rounded border-2 border-fg accent-accent shrink-0">
                             <span class="font-bold text-lg truncate ${item.done ? 'line-through text-mutedFg opacity-50' : 'text-fg'}">${item.text}</span>
                         </label>
-                        <button onclick="deleteItem('lists.checklist', '${item.id}')" class="text-mutedFg hover:text-red-500 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white"><i class="fa-solid fa-xmark"></i></button>
+                        <button onclick="deleteItem('lists.checklist', '${item.id}')" class="text-mutedFg hover:text-red-500 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white shrink-0"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 `;
 				});
 				if (appState.lists.checklist.length === 0)
-					html += `<div class="text-sm text-center text-mutedFg font-bold py-2">全部都準備好了嗎？</div>`;
+					html += `<div class="text-sm text-center text-mutedFg font-bold py-2 w-full">全部都準備好了嗎？</div>`;
 				html += `</div></div>`;
 
-				// Memos
 				html += `
-                <div class="bg-white border-2 border-fg rounded-2xl p-5 shadow-sticker-pink relative animate-[popIn_0.5s_ease-out]">
+                <div class="bg-white border-2 border-fg rounded-2xl p-5 shadow-sticker-pink relative animate-[popIn_0.5s_ease-out] w-full">
                     <h3 class="font-display font-bold text-2xl mb-4 border-b-4 border-muted pb-2 flex items-center gap-2">
                         <i class="fa-solid fa-note-sticky text-secondary"></i> 個人備忘錄
                     </h3>
                     
-                    <form id="form-memo" class="flex gap-2 mb-5">
-                        <input type="text" id="memo-text" class="input-candy !mb-0 flex-1" placeholder="輸入文字或貼上網址..." required>
-                        <button type="submit" class="candy-btn !px-4 !py-2 !rounded-lg !bg-secondary"><i class="fa-solid fa-paper-plane"></i></button>
+                    <form id="form-memo" class="flex gap-2 mb-5 w-full">
+                        <input type="text" id="memo-text" class="input-candy !mb-0 flex-1 min-w-0" placeholder="輸入文字或貼上網址..." required>
+                        <button type="submit" class="candy-btn !px-4 !py-2 !rounded-lg !bg-secondary shrink-0"><i class="fa-solid fa-paper-plane"></i></button>
                     </form>
                     
-                    <div class="flex flex-col gap-3">
+                    <div class="flex flex-col gap-3 w-full">
             `;
 
 				appState.lists.memos
@@ -671,14 +676,14 @@
 					.reverse()
 					.forEach((item) => {
 						html += `
-                    <div class="p-4 border-2 border-fg rounded-xl bg-bg shadow-[2px_2px_0px_#1E293B] relative pr-10">
+                    <div class="p-4 border-2 border-fg rounded-xl bg-bg shadow-[2px_2px_0px_#1E293B] relative pr-10 w-full min-w-0">
                         <div class="font-bold text-fg break-words leading-relaxed">${linkify(item.text)}</div>
-                        <button onclick="deleteItem('lists.memos', '${item.id}')" class="absolute top-2 right-2 text-mutedFg hover:text-red-500 w-6 h-6 flex items-center justify-center rounded-full bg-white border border-border"><i class="fa-solid fa-trash-can text-[10px]"></i></button>
+                        <button onclick="deleteItem('lists.memos', '${item.id}')" class="absolute top-2 right-2 text-mutedFg hover:text-red-500 w-6 h-6 flex items-center justify-center rounded-full bg-white border border-border shrink-0"><i class="fa-solid fa-trash-can text-[10px]"></i></button>
                     </div>
                 `;
 					});
 				if (appState.lists.memos.length === 0)
-					html += `<div class="text-sm text-center text-mutedFg font-bold py-2">沒有備忘錄。</div>`;
+					html += `<div class="text-sm text-center text-mutedFg font-bold py-2 w-full">沒有備忘錄。</div>`;
 
 				html += `</div></div>`;
 				return html;
@@ -693,35 +698,35 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4 mb-8 animate-[popIn_0.4s_ease-out]">
-                    <a href="https://www.jma.go.jp/jma/index.html" target="_blank" class="bg-white border-2 border-fg rounded-2xl p-5 shadow-[4px_4px_0px_#34D399] flex flex-col items-center justify-center gap-3 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_#34D399] transition-all group">
-                        <div class="w-12 h-12 bg-quaternary/20 rounded-full flex items-center justify-center group-hover:bg-quaternary group-hover:text-white transition-colors border-2 border-transparent group-hover:border-fg"><i class="fa-solid fa-cloud-sun text-2xl text-quaternary group-hover:text-white"></i></div>
-                        <span class="font-bold font-display text-lg">天氣預報</span>
+                <div class="grid grid-cols-2 gap-4 mb-8 animate-[popIn_0.4s_ease-out] w-full">
+                    <a href="https://www.jma.go.jp/jma/index.html" target="_blank" class="bg-white border-2 border-fg rounded-2xl p-5 shadow-[4px_4px_0px_#34D399] flex flex-col items-center justify-center gap-3 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_#34D399] transition-all group min-w-0">
+                        <div class="w-12 h-12 bg-quaternary/20 rounded-full flex items-center justify-center group-hover:bg-quaternary group-hover:text-white transition-colors border-2 border-transparent group-hover:border-fg shrink-0"><i class="fa-solid fa-cloud-sun text-2xl text-quaternary group-hover:text-white"></i></div>
+                        <span class="font-bold font-display text-lg truncate w-full text-center">天氣預報</span>
                     </a>
-                    <a href="https://transit.yahoo.co.jp/" target="_blank" class="bg-white border-2 border-fg rounded-2xl p-5 shadow-[4px_4px_0px_#FBBF24] flex flex-col items-center justify-center gap-3 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_#FBBF24] transition-all group">
-                        <div class="w-12 h-12 bg-tertiary/20 rounded-full flex items-center justify-center group-hover:bg-tertiary group-hover:text-white transition-colors border-2 border-transparent group-hover:border-fg"><i class="fa-solid fa-train-subway text-2xl text-tertiary group-hover:text-white"></i></div>
-                        <span class="font-bold font-display text-lg">交通換乘</span>
+                    <a href="https://transit.yahoo.co.jp/" target="_blank" class="bg-white border-2 border-fg rounded-2xl p-5 shadow-[4px_4px_0px_#FBBF24] flex flex-col items-center justify-center gap-3 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_#FBBF24] transition-all group min-w-0">
+                        <div class="w-12 h-12 bg-tertiary/20 rounded-full flex items-center justify-center group-hover:bg-tertiary group-hover:text-white transition-colors border-2 border-transparent group-hover:border-fg shrink-0"><i class="fa-solid fa-train-subway text-2xl text-tertiary group-hover:text-white"></i></div>
+                        <span class="font-bold font-display text-lg truncate w-full text-center">交通換乘</span>
                     </a>
-                    <div class="col-span-2 bg-red-50 border-2 border-red-500 rounded-2xl p-5 shadow-[4px_4px_0px_#EF4444] flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-white rounded-full border-2 border-red-500 flex items-center justify-center shadow-pop"><i class="fa-solid fa-phone-volume text-xl text-red-500 animate-pulse"></i></div>
-                            <div>
-                                <div class="font-display font-extrabold text-red-600 text-xl tracking-wide">當地緊急聯絡</div>
-                                <div class="text-sm font-bold text-red-500/80 mt-0.5">警察 110 ｜ 救護車/火警 119</div>
+                    <div class="col-span-2 bg-red-50 border-2 border-red-500 rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_#EF4444] flex items-center justify-between w-full overflow-hidden">
+                        <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full border-2 border-red-500 flex items-center justify-center shadow-pop shrink-0"><i class="fa-solid fa-phone-volume text-lg sm:text-xl text-red-500 animate-pulse"></i></div>
+                            <div class="min-w-0">
+                                <div class="font-display font-extrabold text-red-600 text-lg sm:text-xl tracking-wide truncate">當地緊急聯絡</div>
+                                <div class="text-xs sm:text-sm font-bold text-red-500/80 mt-0.5 truncate w-full">警察 110 ｜ 救護車/火警 119</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="sticker-card !bg-white blob-radius-3 animate-[popIn_0.5s_ease-out]">
-                    <div class="flex justify-between items-center mb-4 border-b-4 border-muted pb-3">
-                        <h3 class="font-display font-bold text-xl flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-tertiary"></i> 禁忌與注意事項</h3>
-                        <button id="btn-edit-info" class="candy-btn candy-btn-small !bg-fg !text-white !text-sm"><i class="fa-solid fa-pen"></i> 編輯</button>
+                <div class="sticker-card !bg-white blob-radius-3 animate-[popIn_0.5s_ease-out] w-full">
+                    <div class="flex justify-between items-center mb-4 border-b-4 border-muted pb-3 gap-2">
+                        <h3 class="font-display font-bold text-xl flex items-center gap-2 truncate"><i class="fa-solid fa-triangle-exclamation text-tertiary"></i> 禁忌與注意事項</h3>
+                        <button id="btn-edit-info" class="candy-btn candy-btn-small !bg-fg !text-white !text-sm shrink-0"><i class="fa-solid fa-pen"></i> 編輯</button>
                     </div>
                     
-                    <div id="info-display" class="font-sans text-fg font-bold leading-loose whitespace-pre-wrap p-2 min-h-[150px] text-lg bg-bg/50 rounded-xl border-2 border-dashed border-border">${appState.info.notes}</div>
+                    <div id="info-display" class="font-sans text-fg font-bold leading-loose whitespace-pre-wrap p-2 min-h-[150px] text-lg bg-bg/50 rounded-xl border-2 border-dashed border-border break-words w-full">${appState.info.notes}</div>
                     
-                    <div id="info-edit-container" class="hidden">
+                    <div id="info-edit-container" class="hidden w-full">
                         <textarea id="info-edit" class="input-candy w-full h-48 resize-none !text-lg !leading-loose">${appState.info.notes}</textarea>
                         <button id="btn-save-info" class="candy-btn w-full mt-2 !bg-tertiary !text-fg"><i class="fa-solid fa-floppy-disk"></i> 儲存</button>
                     </div>
@@ -743,33 +748,32 @@
                     </div>
                 </div>
 
-                <!-- Add Form -->
-                <div class="sticker-card !bg-muted blob-radius-2 mb-8 relative overflow-hidden animate-[popIn_0.4s_ease-out]">
+                <div class="sticker-card !bg-muted blob-radius-2 mb-8 relative overflow-hidden animate-[popIn_0.4s_ease-out] w-full">
                     <div class="absolute -right-6 -bottom-6 opacity-5 pointer-events-none transform rotate-12">
                         <i class="fa-solid fa-tags text-9xl"></i>
                     </div>
                     <h3 class="font-display font-bold text-lg mb-3 flex items-center gap-2 relative z-10"><i class="fa-solid fa-cart-plus text-accent"></i> 新增欲購商品</h3>
-                    <form id="form-shop" class="flex flex-col gap-1 relative z-10">
-                        <div>
+                    <form id="form-shop" class="flex flex-col gap-1 relative z-10 w-full">
+                        <div class="w-full">
                             <label class="label-candy">商品名稱</label>
                             <input type="text" id="shop-name" class="input-candy" required>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                            <div class="w-full">
                                 <label class="label-candy">分類 (可自填新分類)</label>
                                 <input type="text" id="shop-cat" list="shop-categories" class="input-candy" placeholder="美妝、超市..." required>
                                 <datalist id="shop-categories">${catOptions}</datalist>
                             </div>
-                            <div>
+                            <div class="w-full">
                                 <label class="label-candy">商品照片</label>
-                                <div class="bg-white rounded-lg border-2 border-border p-1.5 h-[52px] flex items-center">
+                                <div class="bg-white rounded-lg border-2 border-border p-1.5 h-[52px] flex items-center overflow-hidden">
                                     <input type="file" id="shop-img" accept="image/*" class="w-full text-xs font-bold file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-tertiary/20 file:text-fg hover:file:bg-tertiary cursor-pointer">
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="w-full">
                             <label class="label-candy">優惠券照片 (選填)</label>
-                            <div class="bg-white rounded-lg border-2 border-border p-1.5 flex items-center mb-4">
+                            <div class="bg-white rounded-lg border-2 border-border p-1.5 flex items-center mb-4 overflow-hidden">
                                 <input type="file" id="shop-coupon" accept="image/*" class="w-full text-xs font-bold file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-secondary/20 file:text-fg hover:file:bg-secondary/40 cursor-pointer">
                             </div>
                         </div>
@@ -777,7 +781,7 @@
                     </form>
                 </div>
 
-                <div class="columns-2 gap-4 space-y-4 animate-[popIn_0.5s_ease-out]">
+                <div class="columns-2 gap-4 space-y-4 animate-[popIn_0.5s_ease-out] w-full">
             `;
 
 				appState.shop.items
@@ -793,13 +797,13 @@
 							: '';
 
 						html += `
-                    <div class="bg-white border-2 border-fg rounded-2xl shadow-pop overflow-hidden flex flex-col relative group break-inside-avoid">
+                    <div class="bg-white border-2 border-fg rounded-2xl shadow-pop overflow-hidden flex flex-col relative group break-inside-avoid w-full">
                         ${imgHtml}
                         <button onclick="deleteItem('shop.items', '${item.id}')" class="absolute top-2 right-2 w-7 h-7 bg-white rounded-full border-2 border-fg shadow-[2px_2px_0px_#1E293B] flex items-center justify-center text-mutedFg hover:text-red-500 hover:bg-red-50 z-10 transition-colors"><i class="fa-solid fa-trash-can text-xs"></i></button>
                         
-                        <div class="p-3 flex-1 flex flex-col">
-                            <span class="inline-block bg-accent text-white px-2 py-0.5 rounded text-[10px] font-bold border border-fg w-max mb-1.5 shadow-[1px_1px_0px_#1E293B]">${item.cat}</span>
-                            <div class="font-bold text-fg leading-tight flex-1">${item.name}</div>
+                        <div class="p-3 flex-1 flex flex-col min-w-0">
+                            <span class="inline-block bg-accent text-white px-2 py-0.5 rounded text-[10px] font-bold border border-fg w-max max-w-full truncate mb-1.5 shadow-[1px_1px_0px_#1E293B]">${item.cat}</span>
+                            <div class="font-bold text-fg leading-tight flex-1 break-words">${item.name}</div>
                             ${couponBtn}
                         </div>
                     </div>
@@ -807,7 +811,7 @@
 					});
 
 				if (appState.shop.items.length === 0)
-					html += `<div class="col-span-2 text-center text-mutedFg py-10 font-bold border-2 border-dashed border-border rounded-xl bg-white/50">購物清單空空的。<br>準備好要大採購了嗎？</div>`;
+					html += `<div class="col-span-2 text-center text-mutedFg py-10 font-bold border-2 border-dashed border-border rounded-xl bg-white/50 w-full">購物清單空空的。<br>準備好要大採購了嗎？</div>`;
 				html += `</div>`;
 				return html;
 			}
@@ -826,10 +830,13 @@
 				navContainer.innerHTML = tabs
 					.map((tab) => {
 						const isActive = currentTab === tab.id;
-						//                // 若背景為黃色 (tertiary)，使用深色字體以確保對比度清晰
 						const activeTextColor =
-							tab.color === 'tertiary' ? 'text-fg' : 'text-white';
-						const activeClasses = `w-[50px] h-[50px] bg-${tab.color} ${activeTextColor} border-2 border-fg rounded-full scale-110 rotate-[5deg]`;
+							tab.color === 'tertiary' || tab.color === 'quaternary'
+								? 'text-fg'
+								: 'text-white';
+
+						// Active 狀態：無陰影、50px、正圓形、邊框2px、縮放1.1、旋轉5度
+						const activeClasses = `w-[50px] h-[50px] border-2 border-fg rounded-full scale-110 rotate-[5deg] bg-${tab.color} ${activeTextColor}`;
 						const inactiveClasses = `w-14 h-14 text-mutedFg hover:bg-muted rounded-2xl`;
 
 						return `
@@ -837,7 +844,7 @@
                         <div class="mb-0.5">
                             <i class="fa-solid ${tab.icon} text-lg"></i>
                         </div>
-                        <span class="text-[9px] font-extrabold tracking-wider font-display uppercase">${tab.id}</span>
+                        <span class="text-[9px] font-extrabold tracking-wider font-display uppercase ${isActive ? 'rotate-[-5deg]' : ''}">${tab.id}</span>
                     </button>
                 `;
 					})
@@ -848,7 +855,6 @@
 				currentTab = tabId;
 				const content = document.getElementById('app-content');
 
-				// Simple fade transition
 				content.style.opacity = 0;
 				setTimeout(() => {
 					switch (tabId) {
@@ -875,10 +881,9 @@
 					renderNav();
 					window.scrollTo(0, 0);
 					content.style.opacity = 1;
-				}, 150); // Matches opacity transition duration (added in CSS via tailwind inline isn't needed if we use simple inline style below)
+				}, 150);
 			}
 
-			// Modal image viewer global function
 			window.viewImage = function (src) {
 				document.getElementById('modal-image-view').src = src;
 				document.getElementById('modal-image').classList.remove('hidden');
@@ -1060,7 +1065,6 @@
 								document.getElementById('shop-coupon').files[0];
 							const category = document.getElementById('shop-cat').value;
 
-							// Add new category if it doesn't exist
 							if (!appState.shop.categories.includes(category)) {
 								appState.shop.categories.push(category);
 							}
@@ -1077,7 +1081,6 @@
 								switchTab(currentTab);
 							};
 
-							// Handle double image compression
 							if (prodFile && couponFile) {
 								compressImage(prodFile, (pImg) => {
 									compressImage(couponFile, (cImg) => finalizeSave(pImg, cImg));
@@ -1102,30 +1105,37 @@
 				.addEventListener('click', () => {
 					dataModal.classList.remove('hidden');
 					dataModal.classList.add('flex');
-					// Tiny timeout to allow display:flex to apply before setting opacity for transition
-					setTimeout(() => {
-						dataModal.style.opacity = 1;
-					}, 10);
+					setTimeout(
+						() =>
+							document
+								.getElementById('modal-data-content')
+								.classList.remove('scale-95'),
+						10,
+					);
 				});
 
 			document
 				.getElementById('btn-close-modal')
 				.addEventListener('click', () => {
-					dataModal.classList.add('hidden');
-					dataModal.classList.remove('flex');
+					document
+						.getElementById('modal-data-content')
+						.classList.add('scale-95');
+					setTimeout(() => {
+						dataModal.classList.add('hidden');
+						dataModal.classList.remove('flex');
+					}, 150);
 				});
 
 			document.getElementById('btn-export').addEventListener('click', () => {
-				const dataStr = JSON.stringify(appState);
-				const blob = new Blob([dataStr], { type: 'application/json' });
-				const url = URL.createObjectURL(blob);
-				const a = document.createElement('a');
-				a.href = url;
-				a.download = `WanderPop_Backup_${new Date().toISOString().slice(0, 10)}.json`;
-				document.body.appendChild(a);
-				a.click();
-				document.body.removeChild(a);
-				URL.revokeObjectURL(url);
+				const dataStr =
+					'data:text/json;charset=utf-8,' +
+					encodeURIComponent(JSON.stringify(appState));
+				const downloadAnchorNode = document.createElement('a');
+				downloadAnchorNode.setAttribute('href', dataStr);
+				downloadAnchorNode.setAttribute('download', 'wanderpop_backup.json');
+				document.body.appendChild(downloadAnchorNode);
+				downloadAnchorNode.click();
+				downloadAnchorNode.remove();
 			});
 
 			document
@@ -1137,56 +1147,38 @@
 					reader.onload = (e) => {
 						try {
 							const importedData = JSON.parse(e.target.result);
-							if (importedData && typeof importedData === 'object') {
-								appState = { ...defaultState, ...importedData };
+							if (
+								importedData &&
+								typeof importedData === 'object' &&
+								importedData.plan
+							) {
+								appState = importedData;
 								saveState();
-								alert('🎉 資料還原成功！');
-								dataModal.classList.add('hidden');
+								alert('✅ 資料還原成功！');
+								document.getElementById('btn-close-modal').click();
 								switchTab(currentTab);
+							} else {
+								alert('❌ 檔案格式不正確');
 							}
 						} catch (err) {
-							alert(
-								'❌ 檔案格式錯誤，請確認這是之前 WanderPop 匯出的 JSON 檔案。',
-							);
+							alert('❌ 無法解析檔案內容');
 						}
 					};
 					reader.readAsText(file);
 				});
 
 			document.getElementById('btn-clear').addEventListener('click', () => {
-				if (
-					confirm(
-						'⚠️ 警告：這將會永久清除這台手機上所有的行程、記帳與清單資料！確定要繼續嗎？',
-					)
-				) {
-					if (
-						confirm(
-							'再次確認：清除後無法復原（除非您有備份過 JSON），確定清除？',
-						)
-					) {
-						appState = JSON.parse(JSON.stringify(defaultState));
-						saveState();
-						dataModal.classList.add('hidden');
-						switchTab('PLAN');
-					}
+				if (confirm('⚠️ 警告：這將會清除您所有的旅遊資料，確定要繼續嗎？')) {
+					appState = JSON.parse(JSON.stringify(defaultState));
+					saveState();
+					alert('🗑️ 資料已清空');
+					document.getElementById('btn-close-modal').click();
+					switchTab(currentTab);
 				}
 			});
 
-			// Add CSS Animation Keyframes dynamically
-			const styleSheet = document.createElement('style');
-			styleSheet.textContent = `
-            @keyframes popIn {
-                0% { opacity: 0; transform: scale(0.95) translateY(10px); }
-                70% { transform: scale(1.02) translateY(-2px); }
-                100% { opacity: 1; transform: scale(1) translateY(0); }
-            }
-        `;
-			document.head.appendChild(styleSheet);
-
-			// Initialize App
-			document.addEventListener('DOMContentLoaded', () => {
-				switchTab('PLAN');
-			});
+			// 首次載入執行
+			switchTab('PLAN');
 		</script>
 	</body>
 </html>
