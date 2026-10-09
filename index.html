@@ -102,12 +102,14 @@
 					@apply bg-white border-2 border-fg rounded-xl shadow-sticker relative p-5 mb-5 transition-all;
 				}
 
-				/* 極度嚴格的寬度限制，解決 iOS Safari 日期/時間選擇器跑版問題 */
+				/* 極度嚴格的寬高限制，解決 iOS Safari 跑版與高度不一致問題 */
 				.input-candy {
 					@apply block bg-white border-2 border-slate-300 rounded-lg text-fg focus:border-accent focus:shadow-pop outline-none transition-all duration-300 p-3 font-sans mb-4 appearance-none;
 					width: 100% !important;
 					max-width: 100% !important;
 					min-width: 0 !important;
+					height: 52px !important;
+					min-height: 52px !important;
 					box-sizing: border-box !important;
 				}
 				.label-candy {
