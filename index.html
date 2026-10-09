@@ -355,7 +355,7 @@
                 <div class="sticker-card !bg-muted blob-radius-2 animate-[popIn_0.4s_ease-out]">
                     <h3 class="font-display font-bold text-lg mb-3 flex items-center gap-2"><i class="fa-solid fa-calendar-plus text-secondary"></i> 新增行程</h3>
                     <form id="form-plan" class="flex flex-col gap-1">
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label class="label-candy">日期</label>
                                 <input type="date" id="plan-date" class="input-candy" required>
@@ -537,7 +537,7 @@
                 <div class="sticker-card blob-radius-1 animate-[popIn_0.5s_ease-out]">
                     <h3 class="font-display font-bold text-lg mb-3 flex items-center gap-2"><i class="fa-solid fa-receipt text-accent"></i> 記一筆花費</h3>
                     <form id="form-expense" class="flex flex-col gap-1">
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label class="label-candy">日期</label>
                                 <input type="date" id="exp-date" class="input-candy" required value="${new Date().toISOString().split('T')[0]}">
@@ -754,7 +754,7 @@
                             <label class="label-candy">商品名稱</label>
                             <input type="text" id="shop-name" class="input-candy" required>
                         </div>
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label class="label-candy">分類 (可自填新分類)</label>
                                 <input type="text" id="shop-cat" list="shop-categories" class="input-candy" placeholder="美妝、超市..." required>
@@ -829,11 +829,11 @@
 						//                // 若背景為黃色 (tertiary)，使用深色字體以確保對比度清晰
 						const activeTextColor =
 							tab.color === 'tertiary' ? 'text-fg' : 'text-white';
-						const activeClasses = `bg-${tab.color} ${activeTextColor} border-2 border-fg rounded-full scale-110 rotate-[5deg]`;
-						const inactiveClasses = `text-mutedFg hover:bg-muted rounded-2xl`;
+						const activeClasses = `w-[50px] h-[50px] bg-${tab.color} ${activeTextColor} border-2 border-fg rounded-full scale-110 rotate-[5deg]`;
+						const inactiveClasses = `w-14 h-14 text-mutedFg hover:bg-muted rounded-2xl`;
 
 						return `
-                    <button onclick="switchTab('${tab.id}')" class="flex flex-col items-center justify-center w-14 h-14 shrink-0 transition-all duration-300 ${isActive ? activeClasses : inactiveClasses}">
+                    <button onclick="switchTab('${tab.id}')" class="flex flex-col items-center justify-center shrink-0 transition-all duration-300 ${isActive ? activeClasses : inactiveClasses}">
                         <div class="mb-0.5">
                             <i class="fa-solid ${tab.icon} text-lg"></i>
                         </div>
